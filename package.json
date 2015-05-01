@@ -1,0 +1,24 @@
+{
+  "name": "marlene",
+  "version": "0.1.0",
+  "homepage": "https://github.com/filipelinhares/marlene",
+  "description": "A simple template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filipelinhares/marlene"
+  },
+  "bugs": {
+    "url": "https://github.com/filipelinhares/marlene/issues",
+    "email": "filipelinhares@outlook.com"
+  },
+  "author": {
+    "name": "Filipe Linhares",
+    "email": "filipelinhares@outlook.com",
+    "url": "http://filipelinhares.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-ruby-sass": "^1.0.5"
+  }
+}
