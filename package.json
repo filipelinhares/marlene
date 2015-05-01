@@ -19,6 +19,11 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-ruby-sass": "^1.0.5"
+    "gulp-autoprefixer": "^2.2.0",
+    "gulp-cssnano": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-scss-lint": "^0.1.12",
+    "gulp-size": "^1.2.1"
   }
 }
