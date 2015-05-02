@@ -6,6 +6,8 @@ var rename = require('gulp-rename');
 var scsslint = require('gulp-scss-lint');
 var autoprefixer = require('gulp-autoprefixer');
 var imagemin = require('gulp-imagemin');
+var browserify = require('gulp-browserify');
+var uglify = require('gulp-uglify');
 
 var dir = {
   jsFolder: 'assets/javascript',
@@ -49,4 +51,16 @@ gulp.task('imagemin', function () {
       optimizationLevel: 4
   }))
   .pipe(gulp.dest('dist/images'));
+});
+
+// ===== Handle browserify and minify our js
+gulp.task('scripts', function() {
+  gulp.src('assets/javascript/main.js')
+  .pipe(browserify({
+    insertGlobals : true
+  }))
+  .pipe(uglify())
+  .pipe(rename('main.min.js'))
+  .pipe(size())
+  .pipe(gulp.dest('dist/js'));
 });
