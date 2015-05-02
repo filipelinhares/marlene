@@ -11,20 +11,26 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
-var dir = {
+var src = {
   jsFolder: 'assets/javascript/main.js',
   styleFolder: 'assets/stylesheets/main-unprefixed.scss',
   imgFolder: 'assets/images/*'
 };
 
+var dist = {
+  jsFolder: 'dist/js',
+  styleFolder: 'dist/css',
+  imgFolder: 'dist/images'
+};
+
 // ===== Compile our SASS
 gulp.task('sass', function() {
-  return sass(dir.styleFolder)
+  return sass(src.styleFolder)
   .on('error', function(err) {
     console.error('Error!', err.message);
   })
   .pipe(rename('main-unprefixed.css'))
-  .pipe(gulp.dest('dist/css'))
+  .pipe(gulp.dest(dist.styleFolder))
   .pipe(reload({stream: true}));
 });
 
@@ -43,25 +49,25 @@ gulp.task('post:css', function() {
   .pipe(nano())
   .pipe(rename('main.min.css'))
   .pipe(size({ showFiles: true }))
-  .pipe(gulp.dest('dist/css'))
+  .pipe(gulp.dest(dist.styleFolder))
   .pipe(reload({stream: true}));
 });
 
 // ===== Image optmization
 gulp.task('imagemin', function () {
-  return gulp.src(dir.imgFolder)
+  return gulp.src(src.imgFolder)
   .pipe(imagemin({
       progressive: true,
       multipass: true,
       optimizationLevel: 4
   }))
-  .pipe(gulp.dest('dist/images'))
+  .pipe(gulp.dest(dist.imgFolder))
   .pipe(reload({stream: true}));
 });
 
 // ===== Handle browserify and minify our js
 gulp.task('scripts', function() {
-  gulp.src(dir.jsFolder)
+  gulp.src(src.jsFolder)
   .pipe(browserify({
     insertGlobals : true
   }))
@@ -69,7 +75,7 @@ gulp.task('scripts', function() {
   .pipe(uglify())
   .pipe(rename('main.min.js'))
   .pipe(size({ showFiles: true }))
-  .pipe(gulp.dest('dist/js'))
+  .pipe(gulp.dest(dist.jsFolder))
   .pipe(reload({stream: true}));
 });
 
@@ -93,8 +99,8 @@ function swallowError(error) {
 
 // ===== Watchs
 gulp.task('default', ['bs-reload', 'browser-sync'],function () {
-  gulp.watch(dir.jsFolder, ['scripts']);
-  gulp.watch(dir.styleFolder, ['sass']);
-  gulp.watch('dist/css/main-unprefixed.css', ['post:css']);
+  gulp.watch(src.jsFolder, ['scripts']);
+  gulp.watch(src.styleFolder, ['sass']);
+  gulp.watch(dist.styleFolder + '/main-unprefixed.css', ['post:css']);
   gulp.watch('*.html', ['bs-reload']);
 });
