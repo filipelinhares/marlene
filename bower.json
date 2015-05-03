@@ -1,0 +1,24 @@
+{
+  "name": "marlene",
+  "version": "0.1.0",
+  "authors": [
+    "Filipe Linhares <lip.linhares@gmail.com>"
+  ],
+  "description": "A simple template",
+  "main": "index.html",
+  "keywords": [
+    "template",
+    "html5",
+    "responsive"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/filipelinhares/marlene",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "assets/vendor"
+  ],
+  "dependencies": {
+    "sanitize-css": "~1.1.0"
+  }
+}
