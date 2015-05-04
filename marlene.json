@@ -1,0 +1,24 @@
+{
+  "srcFolders": {
+    "js": "assets/javascript/main.js",
+    "style": "assets/stylesheets/main.scss",
+    "img": "assets/images/*"
+  },
+  "distFolders": {
+    "js": "dist/js",
+    "style": "dist/css",
+    "img": "dist/images"
+  },
+  "sass": {
+    "prefixVersions": ["last 2 versions", "ie 8", "ie 9"],
+    "distFileName": "main.min.css"
+  },
+  "images": {
+    "progressive": true,
+    "multipass": true,
+    "optimizationLevel": 4
+  },
+  "js": {
+    "distFileName": "main.min.js"
+  }
+}

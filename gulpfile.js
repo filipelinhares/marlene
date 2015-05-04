@@ -2,33 +2,22 @@ var gulp = require('gulp');
 var plugin = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-
-var src = {
-  jsFolder: 'assets/javascript/main.js',
-  styleFolder: 'assets/stylesheets/main.scss',
-  imgFolder: 'assets/images/*'
-};
-
-var dist = {
-  jsFolder: 'dist/js',
-  styleFolder: 'dist/css',
-  imgFolder: 'dist/images'
-};
+var options = require('./marlene');
 
 // ===== Compile our SASS
 gulp.task('sass', function() {
-  gulp.src(src.styleFolder)
+  gulp.src(options.srcFolders.style)
   .pipe(plugin.sass())
   .on('error', function(err) {
     console.error('Error!', err.message);
   })
   .pipe(plugin.autoprefixer({
-    browsers: ['last 2 versions', 'ie 8', 'ie 9']
+    browsers: options.sass.prefixVersions
   }))
   .pipe(plugin.cssnano())
-  .pipe(plugin.rename('main.min.css'))
+  .pipe(plugin.rename(options.sass.distFileName))
   .pipe(plugin.size({ showFiles: true }))
-  .pipe(gulp.dest(dist.styleFolder))
+  .pipe(gulp.dest(options.distFolders.style))
   .pipe(reload({stream: true}));
 });
 
@@ -40,24 +29,24 @@ gulp.task('sass:lint', function () {
 
 // ===== Image optmization
 gulp.task('images', function () {
-  return gulp.src(src.imgFolder)
+  return gulp.src(options.srcFolders.img)
   .pipe(plugin.imagemin({
-      progressive: true,
-      multipass: true,
-      optimizationLevel: 4
+      progressive: options.images.progressive,
+      multipass: options.images.multipass,
+      optimizationLevel: options.images.optimizationLevel
   }))
-  .pipe(gulp.dest(dist.imgFolder))
+  .pipe(gulp.dest(options.distFolders.img))
   .pipe(reload({stream: true}));
 });
 
 // ===== Handle browserify and minify our js
 gulp.task('js', function() {
-  gulp.src(src.jsFolder, {read: false})
+  gulp.src(options.srcFolders.js, {read: false})
   .pipe(plugin.browserify())
   .pipe(plugin.uglify())
-  .pipe(plugin.rename('main.min.js'))
+  .pipe(plugin.rename(options.js.distFileName))
   .pipe(plugin.size({ showFiles: true }))
-  .pipe(gulp.dest(dist.jsFolder))
+  .pipe(gulp.dest(options.distFolders.js))
   .pipe(reload({stream: true}));
 });
 
@@ -81,7 +70,7 @@ function swallowError(error) {
 
 // ===== Watchs
 gulp.task('default', ['bs-reload', 'browser-sync'],function () {
-  gulp.watch(src.jsFolder, ['js']);
-  gulp.watch(src.styleFolder, ['sass','sass:lint']);
+  gulp.watch(options.srcFolders.js, ['js']);
+  gulp.watch(options.srcFolders.style, ['sass','sass:lint']);
   gulp.watch('*.html', ['bs-reload']);
 });
