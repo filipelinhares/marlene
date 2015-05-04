@@ -52,11 +52,8 @@ gulp.task('images', function () {
 
 // ===== Handle browserify and minify our js
 gulp.task('js', function() {
-  gulp.src(src.jsFolder)
-  .pipe(plugin.browserify({
-    insertGlobals : true
-  }))
-  .on('error', swallowError)
+  gulp.src(src.jsFolder, {read: false})
+  .pipe(plugin.browserify())
   .pipe(plugin.uglify())
   .pipe(plugin.rename('main.min.js'))
   .pipe(plugin.size({ showFiles: true }))
