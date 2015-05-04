@@ -30,7 +30,7 @@
 `npm run up`
 > Is the same as: `npm install` and `bower install`.
 
-`npm run server`
+`npm run start`
 > Will open your browser in new tab with a server at `localhost:3000`.
 
 - `npm run sass` Compile sass and minify,

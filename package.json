@@ -34,7 +34,7 @@
   },
   "scripts": {
     "up": "npm install && bower install",
-    "server": "gulp",
+    "start": "gulp",
     "sass": "gulp sass",
     "images": "gulp images",
     "js": "gulp js"

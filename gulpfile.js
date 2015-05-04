@@ -68,8 +68,9 @@ function swallowError(error) {
   this.emit('end');
 }
 
-// ===== Watchs
-gulp.task('default', ['bs-reload', 'browser-sync'],function () {
+gulp.task('compile', ['sass', 'images', 'js']);
+
+gulp.task('default', ['compile', 'browser-sync', 'bs-reload'],function () {
   gulp.watch(options.srcFolders.js, ['js']);
   gulp.watch(options.srcFolders.style, ['sass','sass:lint']);
   gulp.watch('*.html', ['bs-reload']);
