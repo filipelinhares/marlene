@@ -31,5 +31,12 @@
     "gulp-scss-lint": "^0.1.12",
     "gulp-size": "^1.2.1",
     "gulp-uglify": "^1.2.0"
+  },
+  "scripts": {
+    "up": "npm install && bower install",
+    "server": "gulp",
+    "sass": "gulp sass",
+    "images": "gulp images",
+    "js": "gulp js"
   }
 }
